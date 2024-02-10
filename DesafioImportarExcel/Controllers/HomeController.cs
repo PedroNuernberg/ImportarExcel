@@ -4,6 +4,7 @@ using ExcelDataReader;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text;
 
 namespace DesafioImportarExcel.Controllers
@@ -118,7 +119,7 @@ namespace DesafioImportarExcel.Controllers
                                 pedido.SkuProduto = reader.GetValue(2).ToString();
                                 pedido.Data = reader.GetValue(3).ToString();
                                 pedido.Quantidade = Convert.ToInt32(reader.GetValue(4).ToString());
-                                pedido.ValorFaturamento = Convert.ToDecimal(reader.GetValue(5).ToString());
+                                pedido.ValorFaturamento = (decimal)double.Parse(reader.GetValue(5).ToString(), CultureInfo.InvariantCulture);
 
                                 _context.Add(pedido);
                                 await _context.SaveChangesAsync();

@@ -39,7 +39,6 @@
 <table class="table mb-4 mt-4" id="table-pedidos">
     <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">Código Cliente</th>
             <th scope="col">Categoria</th>
             <th scope="col">Sku/produto</th>
@@ -54,7 +53,6 @@
             foreach (var pedido in Model)
             {
                 <tr>
-                    <th scope="row">@pedido.Id</th>
                     <td>@pedido.CodigoCliente</td>
                     <td>@pedido.Categoria</td>
                     <td>@pedido.SkuProduto</td>
