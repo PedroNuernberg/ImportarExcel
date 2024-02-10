@@ -1,0 +1,69 @@
+﻿@model List<Pedido>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="row">
+        <label>Selecione Excel</label>
+        <input type="file" name="file" id="file" />
+        <div class="col-3 mb-4 mt-2">
+            <input type="submit" asp-controller="Home" asp-action="ImportarExcel" class="btn btn-dark" value="Importar Excel" />
+        </div>
+    </div>
+</form>
+
+<form asp-controller="Home" asp-action="ImportarExcel" method="get">
+    <div class="filtros">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label class="control-label">Código Cliente:</label>
+                @Html.TextBox("CodigoCliente", null, new {@class = "form-control" })
+            </div>
+            <div class="form-group col-md-4">
+                <label class="control-label">Categoria:</label>
+                @Html.TextBox("Categoria", null, new {@class = "form-control" })
+            </div>
+            <div class="form-group col-md-4">
+                <label class="control-label">Sku/produto:</label>
+                @Html.TextBox("SkuProduto", null, new {@class = "form-control" })
+            </div>
+            <div class="form-group col-md-4 align-self-end mt-3 mb-4">
+                <input type="submit" value="Filtrar" class="btn btn-outline-dark" />
+                <a asp-action="ImportarExcel" class="btn btn-outline-primary">Limpar</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+<table class="table mb-4 mt-4" id="table-pedidos">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Código Cliente</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Sku/produto</th>
+            <th scope="col">Data</th>
+            <th scope="col">Quant</th>
+            <th scope="col">Valor fat</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model != null && Model.Any())
+        {
+            foreach (var pedido in Model)
+            {
+                <tr>
+                    <th scope="row">@pedido.Id</th>
+                    <td>@pedido.CodigoCliente</td>
+                    <td>@pedido.Categoria</td>
+                    <td>@pedido.SkuProduto</td>
+                    <td>@pedido.Data</td>
+                    <td>@pedido.Quantidade</td>
+                    <td>@pedido.ValorFaturamento</td>
+                </tr>
+
+            }
+        }
+    </tbody>
+</table>
